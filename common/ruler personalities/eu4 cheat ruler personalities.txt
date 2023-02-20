@@ -1,0 +1,30 @@
+Chad = {
+ruler_allow = { chance = { modifier = { factor = 1000 } } }
+heir_allow = { chance = { modifier = { factor = 1000 } } }
+consort_allow = { chance = { modifier = { factor = 1000 } } }
+nation_designer_cost = -1000
+other_ai_war_chance_multiplier = 10000
+easy_war_chance_multiplier = 10000
+war_chance_multiplier = 10000
+building_budget_multiplier = 1000
+enemy_strength_multiplier = 0.1
+wants_disclose_attack = yes
+random_insults = yes
+wants_land = yes
+wants_excommunicate = yes
+wants_heathen_land = yes
+wants_heretic_land = yes
+wants_ecumenical_council = yes
+wants_betray_allies = yes
+wants_threaten_war = yes
+wants_loans = yes
+wants_avoid_ugly_borders = yes
+wants_condottieri = yes
+knowledge_sharing = yes
+razing = yes
+lower_autonomy = yes
+underestimate_ae = yes
+wants_colonies = yes
+country_admin_power = 1	
+country_diplomatic_power = 1	
+country_military_power = 1 }
