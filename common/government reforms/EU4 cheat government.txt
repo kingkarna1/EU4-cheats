@@ -1,0 +1,72 @@
+Normality = {
+icon = "church"
+allow_normal_conversion = yes
+potential = { always = yes }
+fixed_rank = 3
+factions_frame = 2
+royal_marriage = yes
+raze_province = yes
+has_harem = yes
+militarised_society = yes
+has_parliament = yes
+boost_income = yes
+can_use_trade_post = yes
+can_form_trade_league = yes
+#native_mechanic = yes
+queen = yes
+heir = yes
+rulers_can_be_generals = yes
+heirs_can_be_generals = yes
+free_concentrate_development = yes
+modifiers = { yearly_army_professionalism = 0.01 }
+states_general_mechanic = {
+Leftists = {
+army_tradition = 1
+land_morale = 0.1 }
+Rightists = {
+navy_tradition = 1
+naval_morale = 0.1 } }
+custom_attributes = {
+hidden = yes
+can_sell_indulgences = yes
+improved_defender_of_faith = yes
+maratha_general_interaction = yes
+#has_itinerant_capital = yes
+has_tributaries = yes
+enables_natives_idea_group = yes
+active_holy_sites_improve_clergy_loyalty = yes
+clerical_ministers_tech_buff = yes
+pirate_vassal_bonus = yes
+free_religious_culture = yes
+on_church_built_clergy_loyalty = yes
+mercs_do_not_cost_army_professionalism = yes
+has_pashas = yes
+temples_modifier = yes
+free_guarantee_dhimmi_autonomy = yes
+allow_piety_switch_decision = yes
+seizing_land_no_rebels = yes
+winning_battles_increases_legitimacy = yes
+no_influence_from_fetishist_privileges = yes
+reduce_new_deity_decision_cd = yes
+buffed_monastic_temples = yes
+enable_karma_decision = yes
+full_loyalty_on_harmonization = yes
+loyalty_from_celebration = yes
+selling_titles_increases_pa = yes
+can_spread_the_reformation = yes
+subject_tax_modifier_25 = yes
+blocked_call_diet = yes
+free_improve_inland_routes = yes
+monarch_power_on_institutions = yes
+seizing_land_loyalty = yes
+enables_divine_idea_group = yes
+enables_horde_idea_group = yes
+enables_plutocratic_idea_group = yes
+enables_aristocratic_idea_group = yes
+unlock_special_state_edicts = yes
+personal_union_war_contribution = yes }
+ai = { factor = 1000 }
+factions = {
+mr_aristocrats
+mr_traders
+mr_guilds } }
