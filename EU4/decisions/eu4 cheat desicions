@@ -1,0 +1,1628 @@
+country_decisions = {
+
+SeeTheWorld = {
+potential = { NOT = { has_country_flag = IveSeenTheWorld } }
+allow = { NOT = { has_country_flag = IveSeenTheWorld } }
+ai_will_do = { factor = 1000 }
+effect = { every_province = { discover_country = ROOT } 
+every_sea_zone = { discover_country = ROOT }
+set_country_flag = IveSeenTheWorld } }
+
+#better ai stuff
+AutoDevving = {
+ai_importance = 398
+ai_will_do = { factor = 398 }
+potential = { ai = yes }
+allow = { ai = yes
+treasury = 100
+adm_power = 10
+dip_power = 10
+mil_power = 10
+is_at_war = no
+NOT = { num_of_loans = 1 } 
+any_owned_province = { NOT = { has_province_modifier = "AutoDevving" } } }
+effect = { add_treasury = -100
+add_adm_power = -10
+add_dip_power = -10
+add_mil_power = -10
+random_owned_province = { 
+limit = { NOT = { has_province_modifier = "AutoDevving" } } 
+add_base_tax = 1
+add_base_production = 1
+add_base_manpower = 1
+add_province_modifier = {name = "AutoDevving"
+duration = 90 } } } }
+
+AutoReligion = {
+ai_importance = 399
+ai_will_do = { factor = 399 }
+potential = { ai = yes }
+allow = { ai = yes
+treasury = 100
+adm_power = 10
+dip_power = 10
+mil_power = 10
+any_owned_province = { has_owner_religion = no 
+NOT = { has_province_modifier = "religious_zeal_at_conv" } } }
+effect = { add_treasury = -100
+add_adm_power = -10
+add_dip_power = -10
+add_mil_power = -10
+random_owned_province = { limit = { AND = { has_owner_religion = no
+NOT = { has_province_modifier = "religious_zeal_at_conv" } } }
+change_religion = ROOT } } }
+
+AutoCulture = {
+ai_importance = 399
+ai_will_do = { factor = 399 }
+potential = { ai = yes }
+allow = { ai = yes
+treasury = 100
+adm_power = 10
+dip_power = 10
+mil_power = 10
+any_owned_province = { has_owner_culture = no } }
+effect = { add_treasury = -100
+add_adm_power = -10
+add_dip_power = -10
+add_mil_power = -10
+random_owned_province = { limit = { has_owner_culture = no } 
+change_culture = ROOT } } }
+
+AutoTakeSubjects = {
+ai_importance = 400
+ai_will_do = { factor = 400 }
+potential = { ai = yes }
+allow = { any_subject_country = { is_colonial_nation = no } 
+ai = yes
+treasury = 100
+adm_power = 10
+dip_power = 10
+mil_power = 10 }
+effect = {
+add_treasury = -100
+add_adm_power = -10
+add_dip_power = -10
+add_mil_power = -10
+random_subject_country = { limit = { 
+NOT = { is_colonial_nation = yes } } ROOT = { inherit = PREV } } } }
+
+Wanna_change_misc = {
+ai_will_do = { factor = 0 }
+potential = { NOT = { has_country_flag = Wanna_change_misc } }
+allow = { NOT = { has_country_flag = Wanna_change_misc } }
+effect = { set_country_flag = Wanna_change_misc } }
+
+No_change_misc = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_misc } }
+allow = { AND = { has_country_flag = Wanna_change_misc } }
+effect = { clr_country_flag = Wanna_change_misc } }
+
+make_correct = {
+potential = { AND = { has_country_flag = Wanna_change_misc } }
+allow = { AND = { has_country_flag = Wanna_change_misc } }
+ai_will_do = { factor = 0 }
+effect = { add_stability = 10
+add_mercantilism = 100
+change_technology_group = western
+change_unit_type = western
+add_mil_tech = 32
+add_dip_tech = 32
+add_adm_tech = 32
+take_estate_land_share_massive = { estate = all }
+change_estate_land_share = { estate = all
+share = -100 }
+add_estate_loyalty = { estate = all
+loyalty = 100 }
+every_subject_country = { change_unit_type = western
+change_technology_group = western
+add_mil_tech = 32
+add_dip_tech = 32
+add_adm_tech = 32
+set_dynasty = ROOT }
+#buildings
+every_owned_province = { limit = { NOT = { has_building = training_fields } }
+add_building = training_fields }
+every_owned_province = { limit = { NOT = { has_building = conscription_center } }
+add_building = conscription_center }
+every_owned_province = { limit = { NOT = { has_building = stock_exchange } }
+add_building = stock_exchange }
+every_owned_province = { limit = { NOT = { has_building = fort_18th } }
+add_building = fort_18th }
+every_owned_province = { limit = { NOT = { has_building = university } }
+add_building = university }
+every_owned_province = { limit = { NOT = { has_building = town_hall } }
+add_building = town_hall }
+every_owned_province = { limit = { NOT = { has_building = counting_house } }
+add_building = counting_house }
+every_owned_province = { limit = { NOT = { has_building = cathedral } }
+add_building = cathedral }
+#set to parlement
+every_owned_province = { limit = { AND = { is_state = yes } }
+set_seat_in_parliament = yes }
+#build naval stuff
+every_owned_province = { limit = { AND = { has_port = yes } 
+NOT = { has_building = drydock }
+NOT = { has_building = grand_shipyard }
+NOT = { has_building = naval_battery } }
+add_building = drydock
+add_building = grand_shipyard
+add_building = naval_battery }
+#embrace
+every_owned_province = { add_institution_embracement = { which = feudalism
+value = 100 }
+add_institution_embracement = { which = renaissance
+value = 100 }
+add_institution_embracement = { which = new_world_i
+value = 100 }
+add_institution_embracement = { which = printing_press
+value = 100 }
+add_institution_embracement = { which = global_trade
+value = 100 }
+add_institution_embracement = { which = manufactories
+value = 100 }
+add_institution_embracement = { which = enlightenment
+value = 100 }
+add_institution_embracement = { which = industrialization
+value = 100 } }
+#power projection
+add_power_projection = { type = high_sea_power_projection
+amount = 1000 }
+#religion
+every_owned_province = { limit = { NOT = { religion = FROM } }
+change_religion = ROOT }
+every_province = { limit = { AND = { owner = { is_subject_of = ROOT }
+NOT = { religion = FROM } } }
+change_religion = ROOT }
+#core
+every_owned_province = { limit = { NOT = { is_core = FROM } } 
+add_core = ROOT }
+every_province = { limit = { AND = { owner = { is_subject_of = ROOT }
+NOT = { is_core = FROM } } }
+add_core = ROOT
+add_core = THIS }
+#culture
+every_owned_province = { limit = { NOT = { culture = FROM } }
+change_culture = ROOT }
+every_province = { limit = { AND = { owner = { is_subject_of = ROOT }
+NOT = { culture = FROM } } }
+change_culture = ROOT }
+#dev
+every_owned_province = { limit = { NOT = { base_manpower = 100 } }
+set_base_manpower = 100 }
+every_owned_province = { limit = { NOT = { base_production = 100 } }
+set_base_production = 100 }
+every_owned_province = { limit = { NOT = { base_tax = 100 } }
+set_base_tax = 100 }
+every_province = { limit = { AND = { owner = { is_subject_of = ROOT }
+NOT = { base_manpower = 100 } } }
+set_base_manpower = 100 }
+every_province = { limit = { AND = { owner = { is_subject_of = ROOT }
+NOT = { base_production = 100 } } }
+set_base_production = 100 }
+every_province = {
+limit = { AND = { owner = { is_subject_of = ROOT }
+NOT = { base_tax = 100 } } }
+set_base_tax = 100 }
+every_province = { limit = { AND = { owner = { is_subject_of = ROOT } } }
+add_building = university
+add_building = town_hall
+add_building = counting_house
+add_building = cathedral
+add_building = training_fields 
+add_building = conscription_center
+add_building = stock_exchange
+add_building = fort_18th } } }
+
+Manufactories = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_misc } }
+allow = { AND = { has_country_flag = Wanna_change_misc } }
+effect = {
+every_owned_province = { 
+add_province_modifier = { name = "Manufactories"
+duration = -1 } } } }
+
+Take_subjects = {
+ai_will_do = { factor = 0 }
+potential = { AND = { num_of_subjects = 1 
+has_country_flag = Wanna_change_misc } }
+allow = { AND = { num_of_subjects = 1 
+has_country_flag = Wanna_change_misc } }
+effect = {
+every_subject_country = { limit = { 
+NOT = { is_colonial_nation = yes } } ROOT = { inherit = PREV } } } }
+
+become_emperororor = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_misc } }
+allow = { AND = { has_country_flag = Wanna_change_misc } }
+effect = {
+add_imperial_influence = 100
+add_mandate = 100
+add_stability = 10
+hre_inheritable = yes
+enable_imperial_realm_war = yes
+set_hre_religion_treaty = yes
+set_hre_religion = ROOT
+set_allow_female_emperor = yes
+dismantle_empire_of_china = no
+set_emperor_of_china = ROOT
+set_revolution_target = ROOT
+set_emperor = yes
+every_owned_province = {
+limit = { NOT = { is_part_of_hre = yes } }
+set_in_empire = yes } 
+every_country = { limit = { AND = { is_part_of_hre = yes } } 
+ROOT = { vassalize = prev } } } }
+
+Wanna_change_gov = {
+ai_will_do = { factor = 0 }
+potential = { NOT = { has_country_flag = Wanna_change_gov } }
+allow = { NOT = { has_country_flag = Wanna_change_gov } }
+effect = { set_country_flag = Wanna_change_gov } }
+
+No_change_gov = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { clr_country_flag = Wanna_change_gov } }
+
+Republic = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = republic
+add_government_reform = Normality
+add_government_reform = oligarchy_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+pirate_republic_reform = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = republic
+add_government_reform = Normality
+add_government_reform = pirate_republic_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+cossacks_reform = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = republic
+add_government_reform = Normality
+add_government_reform = cossacks_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+dutch_republic = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = republic
+add_government_reform = Normality
+add_government_reform = dutch_republic
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+colonial_government = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = republic
+add_government_reform = Normality
+add_government_reform = colonial_government
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+federal_republic = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = republic
+add_government_reform = Normality
+add_government_reform = federal_republic
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+american_republic = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = republic
+add_government_reform = Normality
+add_government_reform = american_republic
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+great_veche_republic = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = republic
+add_government_reform = Normality
+add_government_reform = great_veche_republic
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+veche_republic = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = republic
+add_government_reform = Normality
+add_government_reform = veche_republic
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+ambrosian_republic = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = republic
+add_government_reform = Normality
+add_government_reform = ambrosian_republic
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+trading_city = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = republic
+add_government_reform = Normality
+add_government_reform = trading_city
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+free_city = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = republic
+add_government_reform = Normality
+add_government_reform = free_city
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+presidential_despot_reform = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = republic
+add_government_reform = Normality
+add_government_reform = presidential_despot_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+kongsi_federation = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = republic
+add_government_reform = Normality
+add_government_reform = kongsi_federation
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+peasants_republic = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = republic
+add_government_reform = Normality
+add_government_reform = peasants_republic
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+junior_revolutionary_republic_reform = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = republic
+add_government_reform = Normality
+add_government_reform = junior_revolutionary_republic_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+revolutionary_republic_reform = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = republic
+add_government_reform = Normality
+add_government_reform = revolutionary_republic_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+military_dictatorship_reform = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = republic
+add_government_reform = Normality
+add_government_reform = military_dictatorship_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+prussian_republic_reform = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = republic
+set_country_flag = formed_prussia_flag
+unlock_government_reform = { government_reform = prussian_republic_reform }
+add_government_reform = Normality
+add_government_reform = prussian_republic_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+venice_merchants_reform = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = republic
+add_government_reform = Normality
+add_government_reform = venice_merchants_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+merchants_reform = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = republic
+add_government_reform = Normality
+add_government_reform = merchants_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+protectorate_parliament_reform = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = republic
+add_government_reform = Normality
+add_government_reform = protectorate_parliament_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+Theocracy = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = theocracy 
+add_government_reform = Normality
+add_government_reform = leading_clergy_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+crusading_kingdom_reform = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = theocracy
+unlock_government_reform = { government_reform = crusading_kingdom_reform }
+add_government_reform = Normality
+add_government_reform = crusading_kingdom_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+reformer_state_reform = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = theocracy 
+add_government_reform = Normality
+add_government_reform = reformer_state_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+merchant_theocracy_reform = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = theocracy 
+add_government_reform = Normality
+add_government_reform = merchant_theocracy_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+holy_horde_reform = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = theocracy 
+unlock_government_reform = { government_reform = holy_horde_reform }
+add_government_reform = Normality
+add_government_reform = holy_horde_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+militarized_crusader_order_reform = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = theocracy
+unlock_government_reform = {  government_reform = militarized_crusader_order_reform }
+add_government_reform = Normality
+add_government_reform = militarized_crusader_order_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+prussian_theocratic_reform = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = theocracy 
+set_country_flag = formed_prussia_flag
+unlock_government_reform = { government_reform = prussian_theocratic_reform }
+add_government_reform = Normality
+add_government_reform = prussian_theocratic_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+teutonic_bishopric_reform = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = theocracy 
+add_government_reform = Normality
+add_government_reform = teutonic_bishopric_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+Monarchy = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+add_government_reform = Normality
+add_government_reform = feudalism_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+revolutionary_empire = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy
+add_government_reform = revolutionary_empire
+add_government_reform = Normality
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+elective_monarchy = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+add_government_reform = Normality
+add_government_reform = elective_monarchy
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+austrian_archduchy_reform = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+add_government_reform = Normality
+add_government_reform = austrian_archduchy_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+plutocratic_reform = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+add_government_reform = Normality
+add_government_reform = plutocratic_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+english_monarchy = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+add_government_reform = Normality
+add_government_reform = english_monarchy
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+lithuanian_grand_empire = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+add_government_reform = Normality
+add_government_reform = lithuanian_grand_empire
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+lithuanian_grand_kingdom = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+add_government_reform = Normality
+add_government_reform = lithuanian_grand_kingdom
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+polish_autocratic_monarchy = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+add_government_reform = Normality
+add_government_reform = polish_autocratic_monarchy
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+polish_elective_monarchy = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+add_government_reform = Normality
+add_government_reform = polish_elective_monarchy
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+polish_great_sejm = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+add_government_reform = Normality
+add_government_reform = polish_great_sejm
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+musa_rule = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+add_government_reform = Normality
+add_government_reform = musa_rule
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+mossi_federal_kingdom = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+add_government_reform = Normality
+add_government_reform = mossi_federal_kingdom
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+solomonic_empire = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+add_government_reform = Normality
+add_government_reform = solomonic_empire
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+negusa_nagast = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+add_government_reform = Normality
+add_government_reform = negusa_nagast
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+norwegian_parliamentary_monarchy = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+add_government_reform = Normality
+add_government_reform = norwegian_parliamentary_monarchy
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+black_army_reform = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+add_government_reform = Normality
+add_government_reform = black_army_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+allotment_system = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+unlock_government_reform = { government_reform = allotment_system }
+add_government_reform = Normality
+add_government_reform = allotment_system
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+livonian_enlightened_monarchy = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy
+unlock_government_reform = { government_reform = livonian_enlightened_monarchy }
+add_government_reform = Normality
+add_government_reform = livonian_enlightened_monarchy
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+livonian_absolute_monarchy = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+unlock_government_reform = { government_reform = livonian_absolute_monarchy }
+add_government_reform = Normality
+add_government_reform = livonian_absolute_monarchy
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+livonian_general_controlled_monarchy = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+unlock_government_reform = { government_reform = livonian_general_controlled_monarchy }
+add_government_reform = Normality
+add_government_reform = livonian_general_controlled_monarchy
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+livonian_naval_controlled_monarchy = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+unlock_government_reform = { government_reform = livonian_naval_controlled_monarchy }
+add_government_reform = Normality
+add_government_reform = livonian_naval_controlled_monarchy
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+livonian_admiral_monarchy = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+unlock_government_reform = { government_reform = livonian_admiral_monarchy }
+add_government_reform = Normality
+add_government_reform = livonian_admiral_monarchy
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+livonian_administrative_monarchy = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+unlock_government_reform = { government_reform = livonian_administrative_monarchy }
+add_government_reform = Normality
+add_government_reform = livonian_administrative_monarchy
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+livonian_constitutional_monarchy = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+unlock_government_reform = { government_reform = livonian_constitutional_monarchy }
+add_government_reform = Normality
+add_government_reform = livonian_constitutional_monarchy
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+livonian_diplomatic_monarchy = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+unlock_government_reform = { government_reform = livonian_diplomatic_monarchy }
+add_government_reform = Normality
+add_government_reform = livonian_diplomatic_monarchy
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+livonian_mercenary_monarchy = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+unlock_government_reform = { government_reform = livonian_mercenary_monarchy }
+add_government_reform = Normality
+add_government_reform = livonian_mercenary_monarchy
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+livonian_monarchy = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+unlock_government_reform = { government_reform = livonian_monarchy }
+add_government_reform = Normality
+add_government_reform = livonian_monarchy
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+livonian_elective_monarchy = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+unlock_government_reform = { government_reform = livonian_elective_monarchy }
+add_government_reform = Normality
+add_government_reform = livonian_elective_monarchy
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+livonian_theocratic_monarchy = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+unlock_government_reform = { government_reform = livonian_theocratic_monarchy }
+add_government_reform = Normality
+add_government_reform = livonian_theocratic_monarchy
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+livonian_trade_monarchy = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+unlock_government_reform = { government_reform = livonian_trade_monarchy }
+add_government_reform = Normality
+add_government_reform = livonian_trade_monarchy
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+livonian_naval_monarchy = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+unlock_government_reform = { government_reform = livonian_naval_monarchy }
+add_government_reform = Normality
+add_government_reform = livonian_naval_monarchy
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+livonian_military_monarchy = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+unlock_government_reform = { government_reform = livonian_military_monarchy }
+add_government_reform = Normality
+add_government_reform = livonian_military_monarchy
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+siamese_absolutism = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+add_government_reform = Normality
+add_government_reform = siamese_absolutism
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+principality = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+add_government_reform = Normality
+add_government_reform = principality
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+austrian_dual_monarchy = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+add_government_reform = Normality
+add_government_reform = austrian_dual_monarchy
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+prussian_monarchy = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy
+set_country_flag = formed_prussia_flag
+unlock_government_reform = { government_reform = prussian_monarchy } 
+add_government_reform = Normality
+add_government_reform = prussian_monarchy
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+danish_archkingdom = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+add_government_reform = Normality
+add_government_reform = danish_archkingdom
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+grand_duchy_reform = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+add_government_reform = Normality
+add_government_reform = grand_duchy_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+indian_sultanate_reform = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = monarchy 
+add_government_reform = Normality
+add_government_reform = indian_sultanate_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+celestial_empire = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+dismantle_empire_of_china = no
+set_emperor_of_china = ROOT
+change_government = monarchy 
+add_government_reform = celestial_empire
+add_government_reform = Normality
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+Tribal = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = { 
+reinstate_parliament = yes
+change_government = tribal 
+add_government_reform = Normality
+add_government_reform = tribal_despotism
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+steppe_horde = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = {
+reinstate_parliament = yes
+change_government = tribal 
+add_government_reform = Normality
+add_government_reform = steppe_horde
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+shaka_regime = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = {
+reinstate_parliament = yes
+change_government = tribal 
+add_government_reform = Normality
+add_government_reform = shaka_regime
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+great_man = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = {
+reinstate_parliament = yes
+change_government = tribal 
+add_government_reform = Normality
+add_government_reform = great_man
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+siberian_tribe = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = {
+reinstate_parliament = yes
+change_government = tribal 
+add_government_reform = Normality
+add_government_reform = siberian_tribe
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+polynesian_kingdom = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = {
+reinstate_parliament = yes
+change_government = tribal 
+add_government_reform = Normality
+add_government_reform = polynesian_kingdom
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+tribal_federation = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = {
+reinstate_parliament = yes
+change_government = tribal 
+add_government_reform = Normality
+add_government_reform = tribal_federation
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+great_mongol_state_reform = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_gov } }
+allow = { AND = { has_country_flag = Wanna_change_gov } }
+effect = {
+reinstate_parliament = yes
+change_government = tribal 
+add_government_reform = Normality
+add_government_reform = great_mongol_state_reform
+add_faction = mr_aristocrats
+add_faction = mr_traders
+add_faction = mr_guilds } }
+
+Wanna_change_rel = {
+ai_will_do = { factor = 0 }
+potential = { NOT = { has_country_flag = Wanna_change_rel } }
+allow = { NOT = { has_country_flag = Wanna_change_rel } }
+effect = { set_country_flag = Wanna_change_rel } }
+
+No_change_rel = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_rel } }
+allow = { AND = { has_country_flag = Wanna_change_rel } }
+effect = { clr_country_flag = Wanna_change_rel } }
+
+confucianism = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_rel } }
+allow = { AND = { has_country_flag = Wanna_change_rel } }
+effect = { 
+change_religion = confucianism
+add_harmony = 100
+add_harmonized_religion = catholic
+add_harmonized_religion = sunni
+add_harmonized_religion = mahayana
+add_harmonized_religion = vajrayana
+add_harmonized_religion = shinto
+add_harmonized_religion = buddhism
+add_harmonized_religion = confucianism
+add_harmonized_religion = hinduism
+add_harmonized_religion = sikhism
+add_harmonized_religion = inti
+add_harmonized_religion = nahuatl
+add_harmonized_religion = animism
+add_harmonized_religion = shamanism
+add_harmonized_religion = totemism
+add_harmonized_religion = mesoamerican_religion
+add_harmonized_religion = norse_pagan_reformed
+add_harmonized_religion = tengri_pagan_reformed
+add_harmonized_religion = dreamtime
+add_harmonized_religion = jewish
+add_harmonized_religion = zoroastrian
+every_owned_province = { 
+limit = { NOT = { religion = FROM } }
+change_religion = ROOT } } }
+
+catholic = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_rel } }
+allow = { AND = { has_country_flag = Wanna_change_rel } }
+effect = { 
+change_religion = catholic
+set_papacy_active = yes
+add_papal_influence = 1000
+every_owned_province = { 
+limit = { NOT = { religion = catholic } }
+change_religion = catholic }
+every_rival_country = { excommunicate = THIS }
+every_enemy_country = { excommunicate = THIS }
+every_coalition_member = { excommunicate = THIS }
+capital_scope = { 
+add_reform_center = catholic 
+add_cardinal = yes } } }
+
+hussite = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_rel } }
+allow = { AND = { has_country_flag = Wanna_change_rel } }
+effect = { 
+change_religion = hussite
+add_church_power = 1000
+every_owned_province = { 
+limit = { NOT = { religion = hussite } }
+change_religion = hussite }
+capital_scope = { add_reform_center = hussite } } }
+
+protestant = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_rel } }
+allow = { AND = { has_country_flag = Wanna_change_rel } }
+effect = { 
+enable_religion = protestant
+change_religion = protestant
+add_church_power = 1000
+every_owned_province = { 
+limit = { NOT = { religion = protestant } }
+change_religion = protestant }
+capital_scope = { add_reform_center = protestant } } }
+
+reformed = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_rel } }
+allow = { AND = { has_country_flag = Wanna_change_rel } }
+effect = { 
+enable_religion = reformed
+change_religion = reformed
+add_fervor = 100
+every_owned_province = { 
+limit = { NOT = { religion = reformed } }
+change_religion = reformed }
+capital_scope = { add_reform_center = reformed } } }
+
+orthodox = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_rel } }
+allow = { AND = { has_country_flag = Wanna_change_rel } }
+effect = { 
+change_religion = orthodox
+add_patriarch_authority = 100
+every_owned_province = { 
+limit = { NOT = { religion = orthodox } }
+change_religion = orthodox } } }
+
+coptic = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_rel } }
+allow = { AND = { has_country_flag = Wanna_change_rel } }
+effect = { 
+change_religion = coptic
+every_owned_province = { 
+limit = { NOT = { religion = coptic } }
+change_religion = coptic } } }
+
+anglican = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_rel } }
+allow = { AND = { has_country_flag = Wanna_change_rel } }
+effect = { 
+enable_religion = anglican
+change_religion = anglican
+add_church_power = 100
+every_owned_province = { 
+limit = { NOT = { religion = anglican } }
+change_religion = anglican }
+capital_scope = { add_reform_center = anglican } } }
+
+sunni = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_rel } }
+allow = { AND = { has_country_flag = Wanna_change_rel } }
+effect = { 
+change_religion = sunni
+every_owned_province = { 
+limit = { NOT = { religion = sunni } }
+change_religion = sunni } } }
+
+ibadi = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_rel } }
+allow = { AND = { has_country_flag = Wanna_change_rel } }
+effect = { 
+change_religion = ibadi
+every_owned_province = { 
+limit = { NOT = { religion = ibadi } }
+change_religion = ibadi } } }
+
+shiite = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_rel } }
+allow = { AND = { has_country_flag = Wanna_change_rel } }
+effect = { 
+change_religion = shiite
+every_owned_province = { 
+limit = { NOT = { religion = shiite } }
+change_religion = shiite } } }
+
+mahayana = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_rel } }
+allow = { AND = { has_country_flag = Wanna_change_rel } }
+effect = { 
+change_religion = mahayana
+every_owned_province = { 
+limit = { NOT = { religion = mahayana } }
+change_religion = mahayana } } }
+
+vajrayana = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_rel } }
+allow = { AND = { has_country_flag = Wanna_change_rel } }
+effect = { 
+change_religion = vajrayana
+every_owned_province = { 
+limit = { NOT = { religion = vajrayana } }
+change_religion = vajrayana } } }
+
+buddhism = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_rel } }
+allow = { AND = { has_country_flag = Wanna_change_rel } }
+effect = { 
+change_religion = buddhism
+every_owned_province = { 
+limit = { NOT = { religion = buddhism } }
+change_religion = buddhism } } }
+
+shinto = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_rel } }
+allow = { AND = { has_country_flag = Wanna_change_rel } }
+effect = { 
+change_religion = shinto
+every_owned_province = { 
+limit = { NOT = { religion = shinto } }
+change_religion = shinto } } }
+
+hinduism = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_rel } }
+allow = { AND = { has_country_flag = Wanna_change_rel } }
+effect = { 
+change_religion = hinduism
+every_owned_province = { 
+limit = { NOT = { religion = hinduism } }
+change_religion = hinduism } } }
+
+sikhism = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_rel } }
+allow = { AND = { has_country_flag = Wanna_change_rel } }
+effect = { 
+enable_religion = sikhism
+change_religion = sikhism
+every_owned_province = { 
+limit = { NOT = { religion = sikhism } }
+change_religion = sikhism } } }
+ 
+jewish = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_rel } }
+allow = { AND = { has_country_flag = Wanna_change_rel } }
+effect = { 
+change_religion = jewish
+add_church_power = 100
+every_owned_province = { 
+limit = { NOT = { religion = jewish } }
+change_religion = jewish } } }
+
+zoroastrian = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_rel } }
+allow = { AND = { has_country_flag = Wanna_change_rel } }
+effect = { 
+change_religion = zoroastrian
+every_owned_province = { 
+limit = { NOT = { religion = zoroastrian } }
+change_religion = zoroastrian } } }
+
+animism = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_rel } }
+allow = { AND = { has_country_flag = Wanna_change_rel } }
+effect = { 
+change_religion = animism
+every_owned_province = { 
+limit = { NOT = { religion = animism } }
+change_religion = animism } } }
+
+shamanism = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_rel } }
+allow = { AND = { has_country_flag = Wanna_change_rel } }
+effect = { 
+change_religion = shamanism
+unlock_cult = mwari_cult
+unlock_cult = waaq_cult
+unlock_cult = enkai_cult
+unlock_cult = zanahary_cult
+unlock_cult = christianity_cult
+unlock_cult = islam_cult
+unlock_cult = buddhism_cult
+unlock_cult = dharmic_cult
+unlock_cult = south_central_american_cult
+unlock_cult = norse_cult
+unlock_cult = jewish_cult
+unlock_cult = zoroastrian_cult
+unlock_cult = yemoja_cult
+unlock_cult = roog_cult
+unlock_cult = nyame_cult
+unlock_cult = cwezi_cult
+unlock_cult = central_african_ancestor_cult
+every_owned_province = { 
+limit = { NOT = { religion = shamanism } }
+change_religion = shamanism } } }
+
+totemism = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_rel } }
+allow = { AND = { has_country_flag = Wanna_change_rel } }
+effect = { 
+change_religion = totemism
+every_owned_province = { 
+limit = { NOT = { religion = totemism } }
+change_religion = totemism } } }
+
+norse_pagan_reformed = {
+ai_will_do = { factor = 0 }
+potential = { AND = { has_country_flag = Wanna_change_rel } }
+allow = { AND = { has_country_flag = Wanna_change_rel } }
+effect = { 
+change_religion = norse_pagan_reformed
+every_owned_province = { 
+limit = { NOT = { religion = norse_pagan_reformed } }
+change_religion = norse_pagan_reformed } } }
+
+}
