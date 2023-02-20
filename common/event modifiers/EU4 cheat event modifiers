@@ -1,0 +1,3 @@
+AutoDevving = {local_hostile_movement_speed = -0.1 }
+Manufactories = { allowed_num_of_manufactories = 10
+allowed_num_of_buildings = 10 }
